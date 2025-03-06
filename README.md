@@ -55,3 +55,13 @@ Ensuring pets go to responsible homes is a priority. I need a way to manage adop
 5. *Community Engagement:* Participate in forums and share experiences.
 
 This document will be updated as the project evolves.
+
+![PurrfectMatch Logo](logo.png)
+
+## Team Members
+
+- Comeagă Ana-Maria
+- Popa Ruxandra-Georgiana
+
+
+
