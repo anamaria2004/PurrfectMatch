@@ -58,6 +58,11 @@ This document will be updated as the project evolves.
 
 ![PurrfectMatch Logo](logo.png)
 
+## UI/UX Design
+The visual and functional aspects of the application have been carefully designed using Figma to ensure an intuitive and user-friendly experience. The complete design prototype can be accessed at the following link: https://www.figma.com/design/GJhZHFhYMw8PCrKwBbszIz/PurrfectMatch?node-id=0-1&m=dev&t=oeA28yD3xIKBTyXN-1
+
+This design provides a comprehensive view of the app’s interface, including key screens and user interactions.
+
 ## Team Members
 
 - Comeagă Ana-Maria
