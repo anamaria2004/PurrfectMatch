@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adopt | PurrfectMatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+          margin: 0;
+          font-family: 'Nunito', sans-serif;
+          background-color: #fff5f8;
+        }
+
+        header {
+          background: #fff5f8;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem 2rem;
+        }
+
+        nav a {
+          margin-left: 1.5rem;
+          text-decoration: none;
+          color: #222;
+          font-weight: 500;
+        }
+
+        nav a.login-btn {
+          background: #ec4899;
+          color: white;
+          padding: 0.6rem 1.2rem;
+          border-radius: 12px;
+          font-weight: 700;
+        }
+
+        .hero {
+          position: relative;
+          text-align: center;
+        }
+
+        .hero-img {
+          width: 100%;
+          height: auto;
+          display: block;
+          border: none;
+        }
+
+        .hero-text {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: white;
+          text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+        }
+
+
+        .hero h1 {
+          font-size: 2.5rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+          font-style: italic;
+        }
+
+        .filters {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          margin: 2rem;
+        }
+
+        .filters input {
+          padding: 0.5rem;
+          border-radius: 8px;
+          border: 1px solid #ccc;
+          width: 200px;
+        }
+
+        .filters button {
+          background-color: #a855f7;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          padding: 0.6rem 1.2rem;
+          cursor: pointer;
+        }
+
+        .grid {
+          max-width: 1000px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          padding: 2rem;
+        }
+
+        .card {
+          display: flex;
+          gap: 1rem;
+          background: white;
+          border-radius: 16px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          overflow: hidden;
+          padding: 1rem;
+          align-items: center;
+        }
+
+        .card img {
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 12px;
+        }
+
+        .card-content {
+          flex: 1;
+        }
+
+        .card-content h3 {
+          margin: 0;
+          font-size: 1.4rem;
+        }
+
+        .card-content p {
+          margin: 0.4rem 0;
+        }
+
+        .buttons {
+          margin-top: 0.5rem;
+        }
+
+        .buttons button {
+          margin-right: 0.5rem;
+          padding: 0.4rem 0.8rem;
+          border: none;
+          border-radius: 8px;
+          font-weight: bold;
+          cursor: pointer;
+        }
+
+        .adopt {
+          background: #db2777;
+          color: white;
+        }
+
+        .info {
+          background: #9333ea;
+          color: white;
+        }
+
+        footer {
+          background: #fff5f8;
+          padding: 2rem;
+          text-align: center;
+          font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header style="background-color: #fff5f8; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem;">
+    <img src="/logo.png" alt="Logo" style="height: 70px;">
+    <nav style="display: flex; align-items: center; gap: 2rem;">
+        <a href="/index" style="text-decoration: none; color: #222; font-size: 1rem;">Home</a>
+        <a href="/about" style="text-decoration: none; color: #222; font-size: 1rem;">About</a>
+        <a href="/adopt" style="text-decoration: none; color: #222; font-size: 1rem;">Adopt</a>
+        <a href="/login" style="background: #ec4899; color: white; padding: 0.6rem 1.5rem; border-radius: 14px; font-weight: 700; text-decoration: none;">Login</a>
+    </nav>
+</header>
+
+
+<div class="hero">
+    <img src="/adopt_bg.png" alt="Hero image" class="hero-img">
+    <div class="hero-text">
+        <h1>Find your Purrfect Match</h1>
+        <p><i>Find. Love. Adopt.</i></p>
+    </div>
+</div>
+
+<div class="filters">
+    <input type="text" placeholder="Search bar">
+    <button>Filter</button>
+    <button>Sort</button>
+</div>
+
+<div class="grid">
+    <!-- Max -->
+    <div class="card">
+        <img src="/max.png" alt="Max">
+        <div class="card-content">
+            <h3>🐶 Max</h3>
+            <p><b>Breed:</b> Mixed Breed</p>
+            <p><b>Age:</b> 3 Years Old</p>
+            <p><b>Gender:</b> Male</p>
+            <p><b>Health:</b> Excellent. Neutered, vaccinated, regular vet checks.</p>
+            <p><b>Personality:</b> Loyal, affectionate, great with kids and pets. Loves belly rubs.</p>
+            <div class="buttons">
+                <button class="adopt" onclick="location.href='/pet'">Adopt now</button>
+                <button class="info">More info</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mittens -->
+    <div class="card">
+        <img src="/mittens.png" alt="Mittens">
+        <div class="card-content">
+            <h3>🐱 Mittens</h3>
+            <p><b>Breed:</b> Short Hair Cat</p>
+            <p><b>Age:</b> 2 Years</p>
+            <p><b>Gender:</b> Female</p>
+            <p><b>Health:</b> Healthy, vaccinated, microchipped.</p>
+            <p><b>Personality:</b> Playful, cuddly, enjoys napping in the sun.</p>
+            <div class="buttons">
+                <button class="adopt">Adopt now</button>
+                <button class="info">More info</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Biscuit -->
+    <div class="card">
+        <img src="/biscuit.png" alt="Biscuit">
+        <div class="card-content">
+            <h3>🐰 Biscuit</h3>
+            <p><b>Breed:</b> Rabbit</p>
+            <p><b>Age:</b> 1 Year</p>
+            <p><b>Gender:</b> Male</p>
+            <p><b>Health:</b> Neutered, loves carrots and space to hop.</p>
+            <p><b>Personality:</b> Curious, energetic, garden explorer.</p>
+            <div class="buttons">
+                <button class="adopt">Adopt now</button>
+                <button class="info">More info</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sunny -->
+    <div class="card">
+        <img src="/sunny.png" alt="Sunny">
+        <div class="card-content">
+            <h3>🐦 Sunny</h3>
+            <p><b>Species:</b> Budgie</p>
+            <p><b>Age:</b> 1.5 Years</p>
+            <p><b>Gender:</b> Unknown</p>
+            <p><b>Health:</b> Healthy, sings daily.</p>
+            <p><b>Personality:</b> Cheerful, musical, loves attention.</p>
+            <div class="buttons">
+                <button class="adopt">Adopt now</button>
+                <button class="info">More info</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nibbles -->
+    <div class="card">
+        <img src="/nibbles.png" alt="Nibbles">
+        <div class="card-content">
+            <h3>🐹 Nibbles</h3>
+            <p><b>Species:</b> Hamster</p>
+            <p><b>Age:</b> 6 Months</p>
+            <p><b>Gender:</b> Female</p>
+            <p><b>Health:</b> Very healthy, loves exercise wheel.</p>
+            <p><b>Personality:</b> Adventurous, small but mighty.</p>
+            <div class="buttons">
+                <button class="adopt">Adopt now</button>
+                <button class="info">More info</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shelby -->
+    <div class="card">
+        <img src="/shelby.png" alt="Shelby">
+        <div class="card-content">
+            <h3>🐢 Shelby</h3>
+            <p><b>Species:</b> Tortoise</p>
+            <p><b>Age:</b> 5 Years</p>
+            <p><b>Gender:</b> Male</p>
+            <p><b>Health:</b> Excellent, needs sun and space.</p>
+            <p><b>Personality:</b> Peaceful, loves to roam the yard.</p>
+            <div class="buttons">
+                <button class="adopt">Adopt now</button>
+                <button class="info">More info</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer style="background-color: #fff5f8; padding: 3rem 2rem; color: #333;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;">
+
+        <div>
+            <img src="/logo.png" alt="Logo" style="height: 60px;">
+            <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                <img src="https://img.icons8.com/ios-filled/24/000000/facebook.png" alt="FB">
+                <img src="https://img.icons8.com/ios-filled/24/000000/linkedin.png" alt="LinkedIn">
+                <img src="https://img.icons8.com/ios-filled/24/000000/youtube-play.png" alt="YouTube">
+                <img src="https://img.icons8.com/ios-filled/24/000000/instagram-new.png" alt="Instagram">
+            </div>
+        </div>
+
+
+        <div style="display: flex; gap: 4rem; margin-top: 2rem;">
+            <div>
+                <h4>Useful Links</h4>
+                <p>Find a pet</p>
+                <p>Donate</p>
+                <p>Careers</p>
+            </div>
+            <div>
+                <h4>How you can help</h4>
+                <p>Adopt</p>
+                <p>Donate</p>
+                <p>Volunteer</p>
+            </div>
+            <div>
+                <h4>About</h4>
+                <p>Our Sponsors</p>
+                <p>Terms of Use</p>
+                <p>Privacy Policy</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
