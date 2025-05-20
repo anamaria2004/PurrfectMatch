@@ -1,14 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Adopt | PurrfectMatch</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        function filterPets() {
+          const nameInput = document.getElementById('nameFilter').value.toLowerCase();
+          const breedInput = document.getElementById('breedFilter').value.toLowerCase();
+          const genderInput = document.getElementById('genderFilter').value.toLowerCase();
+
+          const cards = document.querySelectorAll('.card');
+
+          cards.forEach(card => {
+            const petName = card.querySelector('h3').textContent.toLowerCase();
+            const petBreed = card.querySelector('p:nth-of-type(1) span').textContent.toLowerCase();
+            const petGender = card.querySelector('p:nth-of-type(3) span').textContent.toLowerCase();
+
+            const matchesName = petName.includes(nameInput);
+            const matchesBreed = petBreed.includes(breedInput);
+            const matchesGender = !genderInput || petGender === genderInput;
+
+            if (matchesName && matchesBreed && matchesGender) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+    </script>
+
     <style>
         body {
           margin: 0;
           font-family: 'Nunito', sans-serif;
           background-color: #fff5f8;
+        }
+
+        .filter-container {
+            width: 80%;
+            margin: 20px auto 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-container input {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1.5px solid #ccc;
+            font-size: 14px;
+            flex: 1 1 30%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-container input:focus {
+            border-color: #007BFF;
+            outline: none;
         }
 
         header {
@@ -159,17 +209,44 @@
           text-align: center;
           font-size: 0.9rem;
         }
+
+        /* Style for the login and sign out buttons */
+.login-btn {
+    background: none;
+    border: none;
+    color: #fff; /* adjust color as needed */
+    text-decoration: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.login-btn:hover {
+    color: #ccc; /* hover effect */
+}
+
+
     </style>
 </head>
 <body>
 
 <header style="background-color: #fff5f8; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem;">
     <img src="/logo.png" alt="Logo" style="height: 70px;">
-    <nav style="display: flex; align-items: center; gap: 2rem;">
-        <a href="/index" style="text-decoration: none; color: #222; font-size: 1rem;">Home</a>
-        <a href="/about" style="text-decoration: none; color: #222; font-size: 1rem;">About</a>
-        <a href="/adopt" style="text-decoration: none; color: #222; font-size: 1rem;">Adopt</a>
-        <a href="/login" style="background: #ec4899; color: white; padding: 0.6rem 1.5rem; border-radius: 14px; font-weight: 700; text-decoration: none;">Login</a>
+    <nav xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6">
+        <a href="index">Home</a>
+        <a href="about">About</a>
+        <a href="adopt">Adopt</a>
+
+        <!-- Show Login if user is NOT authenticated -->
+        <a href="login" class="login-btn" sec:authorize="!isAuthenticated()">Login</a>
+
+        <!-- Show Sign Out if user IS authenticated -->
+        <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" style="display: inline;">
+            <button type="submit" class="login-btn" style="border:none; background:none; color:inherit; cursor:pointer;">
+                Sign Out
+            </button>
+        </form>
     </nav>
 </header>
 
@@ -182,115 +259,34 @@
     </div>
 </div>
 
-<div class="filters">
-    <input type="text" placeholder="Search bar">
-    <button>Filter</button>
-    <button>Sort</button>
+<div class="filter-container">
+    <input type="text" id="nameFilter" placeholder="Filter by Name" onkeyup="filterPets()">
+    <input type="text" id="breedFilter" placeholder="Filter by Breed" onkeyup="filterPets()">
+    <input type="text" id="genderFilter" placeholder="Filter by Gender" onkeyup="filterPets()">
 </div>
+
 
 <div class="grid">
-    <!-- Max -->
-    <div class="card">
-        <img src="/max.png" alt="Max">
+    <div class="card" th:each="pet : ${pets}">
+        <img th:src="${pet.photoPath}" th:alt="${pet.name}">
         <div class="card-content">
-            <h3>🐶 Max</h3>
-            <p><b>Breed:</b> Mixed Breed</p>
-            <p><b>Age:</b> 3 Years Old</p>
-            <p><b>Gender:</b> Male</p>
-            <p><b>Health:</b> Excellent. Neutered, vaccinated, regular vet checks.</p>
-            <p><b>Personality:</b> Loyal, affectionate, great with kids and pets. Loves belly rubs.</p>
+            <h3 th:text="'🐾 ' + ${pet.name}"></h3>
+            <p><b>Breed:</b> <span th:text="${pet.breed}">Mixed</span></p>
+            <p><b>Age:</b> <span th:text="${pet.age} + ' Years'">3</span></p>
+            <p><b>Gender:</b> <span th:text="${pet.gender}">Male</span></p>
+            <p><b>Health:</b> <span th:text="${pet.health}">Healthy</span></p>
+            <p><b>Personality:</b> <span th:text="${pet.personality}">Loyal</span></p>
             <div class="buttons">
-                <button class="adopt" onclick="location.href='/pet'">Adopt now</button>
-                <button class="info">More info</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mittens -->
-    <div class="card">
-        <img src="/mittens.png" alt="Mittens">
-        <div class="card-content">
-            <h3>🐱 Mittens</h3>
-            <p><b>Breed:</b> Short Hair Cat</p>
-            <p><b>Age:</b> 2 Years</p>
-            <p><b>Gender:</b> Female</p>
-            <p><b>Health:</b> Healthy, vaccinated, microchipped.</p>
-            <p><b>Personality:</b> Playful, cuddly, enjoys napping in the sun.</p>
-            <div class="buttons">
-                <button class="adopt">Adopt now</button>
-                <button class="info">More info</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Biscuit -->
-    <div class="card">
-        <img src="/biscuit.png" alt="Biscuit">
-        <div class="card-content">
-            <h3>🐰 Biscuit</h3>
-            <p><b>Breed:</b> Rabbit</p>
-            <p><b>Age:</b> 1 Year</p>
-            <p><b>Gender:</b> Male</p>
-            <p><b>Health:</b> Neutered, loves carrots and space to hop.</p>
-            <p><b>Personality:</b> Curious, energetic, garden explorer.</p>
-            <div class="buttons">
-                <button class="adopt">Adopt now</button>
-                <button class="info">More info</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sunny -->
-    <div class="card">
-        <img src="/sunny.png" alt="Sunny">
-        <div class="card-content">
-            <h3>🐦 Sunny</h3>
-            <p><b>Species:</b> Budgie</p>
-            <p><b>Age:</b> 1.5 Years</p>
-            <p><b>Gender:</b> Unknown</p>
-            <p><b>Health:</b> Healthy, sings daily.</p>
-            <p><b>Personality:</b> Cheerful, musical, loves attention.</p>
-            <div class="buttons">
-                <button class="adopt">Adopt now</button>
-                <button class="info">More info</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Nibbles -->
-    <div class="card">
-        <img src="/nibbles.png" alt="Nibbles">
-        <div class="card-content">
-            <h3>🐹 Nibbles</h3>
-            <p><b>Species:</b> Hamster</p>
-            <p><b>Age:</b> 6 Months</p>
-            <p><b>Gender:</b> Female</p>
-            <p><b>Health:</b> Very healthy, loves exercise wheel.</p>
-            <p><b>Personality:</b> Adventurous, small but mighty.</p>
-            <div class="buttons">
-                <button class="adopt">Adopt now</button>
-                <button class="info">More info</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Shelby -->
-    <div class="card">
-        <img src="/shelby.png" alt="Shelby">
-        <div class="card-content">
-            <h3>🐢 Shelby</h3>
-            <p><b>Species:</b> Tortoise</p>
-            <p><b>Age:</b> 5 Years</p>
-            <p><b>Gender:</b> Male</p>
-            <p><b>Health:</b> Excellent, needs sun and space.</p>
-            <p><b>Personality:</b> Peaceful, loves to roam the yard.</p>
-            <div class="buttons">
-                <button class="adopt">Adopt now</button>
+                <button class="adopt"
+                        th:onclick="'location.href=\'/pet/' + ${pet.id} + '\';'">
+                    Adopt now
+                </button>
                 <button class="info">More info</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <footer style="background-color: #fff5f8; padding: 3rem 2rem; color: #333;">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;">

@@ -27,14 +27,6 @@
             font-weight: 500;
         }
 
-        nav a.login-btn {
-            background: #ec4899;
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 14px;
-            font-weight: 700;
-        }
-
         .login-container {
             max-width: 400px;
             background: #fecdd3;
@@ -67,7 +59,7 @@
             font-weight: bold;
         }
 
-        input[type="email"],
+        input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 0.75rem;
@@ -145,16 +137,23 @@
 
 <div class="login-container">
     <h2>Log In</h2>
-    <form action="/login" method="post">
-    <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+    <!-- Security messages -->
+    <div th:if="${param.error}" style="color: red; text-align: center;">Invalid username or password.</div>
+    <div th:if="${param.logout}" style="color: green; text-align: center;">You have been logged out.</div>
+    <div th:if="${param.registered}" style="color: green; text-align: center;">Registration successful! Please log in.</div>
+
+    <form th:action="@{/login}" method="post">
+        <label for="username">Email</label>
+        <input type="text" id="username" name="username" placeholder="you@example.com" required>
 
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
         <button type="submit" class="btn-login">Log in</button>
     </form>
-    <p>Don't have an account? <a href="#">Register here</a></p>
+
+    <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
 </div>
 
 <footer>
